@@ -1,0 +1,81 @@
+'use strict';
+
+var assign   = require('es5-ext/object/assign')
+  , callable = require('es5-ext/object/valid-callable')
+  , value    = require('es5-ext/object/valid-value')
+  , d        = require('d/d')
+  , autoBind = require('d/auto-bind')
+
+  , hasOwnProperty = Object.prototype.hasOwnProperty
+  , defineProperty = Object.defineProperty
+  , defineProperties = Object.defineProperties
+  , Iterator;
+
+module.exports = Iterator = function (list, context) {
+	if (!(this instanceof Iterator)) return new Iterator(list, context);
+	defineProperties(this, {
+		__list__: d('w', value(list)),
+		__context__: d('w', context),
+		__nextIndex__: d('w', 0)
+	});
+	if (!context) return;
+	callable(context.on);
+	context.on('_add', this._onAdd);
+	context.on('_delete', this._onDelete);
+};
+
+Object.defineProperties(Iterator.prototype, assign({
+	constructor: d(Iterator),
+	next: d(function () {
+		var i, l;
+		if (!this.__list__) return { done: true, value: undefined };
+		if (this.__redo__) {
+			i = this.__redo__.shift();
+			if (i !== undefined) return { done: false, value: this._resolve(i) };
+		}
+		l = this.__list__.length >>> 0;
+		while (this.__nextIndex__ < l) {
+			if (hasOwnProperty.call(this.__list__, this.__nextIndex__)) {
+				return { done: false, value: this._resolve(this.__nextIndex__++) };
+			}
+			++this.__nextIndex__;
+		}
+		this._unBind();
+		return { done: true, value: undefined };
+	}),
+	_resolve: d(function (i) { return this.__list__[i]; }),
+	_unBind: d(function () {
+		this.__list__ = null;
+		delete this.__redo__;
+		if (!this.__context__) return;
+		this.__context__.off('_add', this._onAdd);
+		this.__context__.off('_delete', this._onDelete);
+		this.__context__ = null;
+	}),
+	toString: d(function () { return '[object Iterator]'; }),
+	'@@iterator': d(function () { return this; })
+}, autoBind({
+	_onAdd: d(function (index) {
+		if (index >= this.__nextIndex__) return;
+		++this.__nextIndex__;
+		if (!this.__redo__) {
+			defineProperty(this, '__redo__', d('c', [index]));
+			return;
+		}
+		this.__redo__.forEach(function (redo, i) {
+			if (redo >= index) this.__redo__[i] = ++redo;
+		}, this);
+		this.__redo__.push(index);
+	}),
+	_onDelete: d(function (index) {
+		var i;
+		if (index >= this.__nextIndex__) return;
+		--this.__nextIndex__;
+		if (!this.__redo__) return;
+		i = this.__redo__.indexOf(index);
+		if (i !== -1) this.__redo__.splice(i, 1);
+		this.__redo__.forEach(function (redo, i) {
+			if (redo > index) this.__redo__[i] = --redo;
+		}, this);
+	})
+})));
