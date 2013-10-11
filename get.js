@@ -10,5 +10,5 @@ module.exports = function (obj) {
 		return obj['@@iterator']();
 	}
 	if (isArray(obj)) return new ArrayIterator(obj);
-	return null;
+	throw new TypeError(obj + " is not iterable");
 };
