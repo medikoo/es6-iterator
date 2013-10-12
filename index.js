@@ -1,6 +1,7 @@
 'use strict';
 
-var assign   = require('es5-ext/object/assign')
+var clear    = require('es5-ext/array/#/clear')
+  , assign   = require('es5-ext/object/assign')
   , callable = require('es5-ext/object/valid-callable')
   , value    = require('es5-ext/object/valid-value')
   , d        = require('d/d')
@@ -22,6 +23,7 @@ module.exports = Iterator = function (list, context) {
 	callable(context.on);
 	context.on('_add', this._onAdd);
 	context.on('_delete', this._onDelete);
+	context.on('_clear', this._onClear);
 };
 
 Object.defineProperties(Iterator.prototype, assign({
@@ -50,6 +52,7 @@ Object.defineProperties(Iterator.prototype, assign({
 		if (!this.__context__) return;
 		this.__context__.off('_add', this._onAdd);
 		this.__context__.off('_delete', this._onDelete);
+		this.__context__.off('_clear', this._onClear);
 		this.__context__ = null;
 	}),
 	toString: d(function () { return '[object Iterator]'; }),
@@ -77,5 +80,9 @@ Object.defineProperties(Iterator.prototype, assign({
 		this.__redo__.forEach(function (redo, i) {
 			if (redo > index) this.__redo__[i] = --redo;
 		}, this);
+	}),
+	_onClear: d(function () {
+		if (this.__redo__) clear.call(this.__redo__);
+		this.__nextIndex__ = 0;
 	})
 })));

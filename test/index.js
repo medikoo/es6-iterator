@@ -75,6 +75,40 @@ module.exports = function (T) {
 			y.emit('_delete', 5);
 			a.deep(it.next(), { done: false, value: 'sześć' }, "#5");
 			a.deep(it.next(), { done: true, value: undefined }, "End");
+		},
+		"Emited: Clear #1": function (a) {
+			var x = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć'], y, it;
+
+			y = ee();
+			it = new T(x, y);
+			a.deep(it.next(), { done: false, value: 'raz' }, "#1");
+			a.deep(it.next(), { done: false, value: 'dwa' }, "#2");
+			x.length = 0;
+			y.emit('_clear');
+			a.deep(it.next(), { done: true, value: undefined }, "End");
+		},
+		"Emited: Clear #2": function (a) {
+			var x = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć'], y, it;
+
+			y = ee();
+			it = new T(x, y);
+			a.deep(it.next(), { done: false, value: 'raz' }, "#1");
+			a.deep(it.next(), { done: false, value: 'dwa' }, "#2");
+			x.length = 0;
+			y.emit('_clear');
+			x.push('foo');
+			x.push('bar');
+			a.deep(it.next(), { done: false, value: 'foo' }, "#3");
+			a.deep(it.next(), { done: false, value: 'bar' }, "#4");
+			x.splice(1, 0, 'półtora');
+			y.emit('_add', 1);
+			x.splice(1, 0, '1.25');
+			y.emit('_add', 1);
+			x.splice(0, 1);
+			y.emit('_delete', 0);
+			a.deep(it.next(), { done: false, value: 'półtora' }, "Insert");
+			a.deep(it.next(), { done: false, value: '1.25' }, "Insert #2");
+			a.deep(it.next(), { done: true, value: undefined }, "End");
 		}
 	};
 };
