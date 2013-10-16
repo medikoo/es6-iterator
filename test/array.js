@@ -46,6 +46,25 @@ module.exports = function (T) {
 			x.pop();
 			a.deep(it.next(), { done: false, value: 5 }, "#5");
 			a.deep(it.next(), { done: true, value: undefined }, "End");
+		},
+		"Sparse": function (a) {
+			var x = new Array(6), it;
+
+			x[2] = 'raz';
+			x[4] = 'dwa';
+			it = new T(x);
+			a.deep(it.next(), { done: false, value: undefined }, "#1");
+			a.deep(it.next(), { done: false, value: undefined }, "#2");
+			a.deep(it.next(), { done: false, value: 'raz' }, "#3");
+			a.deep(it.next(), { done: false, value: undefined }, "#4");
+			a.deep(it.next(), { done: false, value: 'dwa' }, "#5");
+			a.deep(it.next(), { done: false, value: undefined }, "#6");
+			a.deep(it.next(), { done: true, value: undefined }, "End");
+
+			it = new T(x, 'sparse:value');
+			a.deep(it.next(), { done: false, value: 'raz' }, "#3");
+			a.deep(it.next(), { done: false, value: 'dwa' }, "#5");
+			a.deep(it.next(), { done: true, value: undefined }, "End");
 		}
 	}
 }
