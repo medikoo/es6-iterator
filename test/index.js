@@ -20,22 +20,6 @@ module.exports = function (T) {
 			a.deep(y = it.next(), { done: true, value: undefined }, "End");
 			a.not(y, it.next(), "Recreate result on dead");
 		},
-		"Sparse": function (a) {
-			var x = new Array(345), it;
-
-			x[23] = 'raz';
-			x[64] = 'dwa';
-			x[78] = 'trzy';
-			x[230] = 'cztery';
-			x[323] = 'pięć';
-			it = new T(x);
-			a.deep(it.next(), { done: false, value: 'raz' }, "#1");
-			a.deep(it.next(), { done: false, value: 'dwa' }, "#2");
-			a.deep(it.next(), { done: false, value: 'trzy' }, "#3");
-			a.deep(it.next(), { done: false, value: 'cztery' }, "#4");
-			a.deep(it.next(), { done: false, value: 'pięć' }, "#5");
-			a.deep(it.next(), { done: true, value: undefined }, "End");
-		},
 		"Emited": function (a) {
 			var x = ['raz', 'dwa', 'trzy', 'cztery', 'pięć'], y, it;
 
