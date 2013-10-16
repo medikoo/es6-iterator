@@ -37,7 +37,8 @@ Object.defineProperties(Iterator.prototype, assign({
 		}
 		l = this.__list__.length >>> 0;
 		while (this.__nextIndex__ < l) {
-			if (hasOwnProperty.call(this.__list__, this.__nextIndex__)) {
+			if (!this._sparse ||
+					hasOwnProperty.call(this.__list__, this.__nextIndex__)) {
 				return { done: false, value: this._resolve(this.__nextIndex__++) };
 			}
 			++this.__nextIndex__;
@@ -45,6 +46,7 @@ Object.defineProperties(Iterator.prototype, assign({
 		this._unBind();
 		return { done: true, value: undefined };
 	}),
+	_sparse: d(false),
 	_resolve: d(function (i) { return this.__list__[i]; }),
 	_unBind: d(function () {
 		this.__list__ = null;
