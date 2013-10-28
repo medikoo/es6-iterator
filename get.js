@@ -1,14 +1,11 @@
 'use strict';
 
-var value         = require('es5-ext/object/valid-value')
-  , ArrayIterator = require('./array')
-
-  , isArray = Array.isArray;
+var ArrayIterator = require('./array')
+  , iterable      = require('./valid-iterable');
 
 module.exports = function (obj) {
-	if (typeof value(obj)['@@iterator'] === 'function') {
+	if (typeof iterable(obj)['@@iterator'] === 'function') {
 		return obj['@@iterator']();
 	}
-	if (isArray(obj)) return new ArrayIterator(obj);
-	throw new TypeError(obj + " is not iterable");
+	return new ArrayIterator(obj);
 };
