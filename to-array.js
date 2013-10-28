@@ -1,11 +1,14 @@
 'use strict';
 
-var value    = require('es5-ext/object/valid-value')
-  , callable = require('es5-ext/object/valid-callable');
+var value = require('es5-ext/object/valid-value')
+  , get   = require('./get')
 
-module.exports = function (iterator) {
-	var result, arr;
-	(value(iterator) && callable(iterator.next));
+  , isArray  = Array.isArray;
+
+module.exports = function (iterable) {
+	var result, arr, iterator;
+	if (isArray(iterable)) return iterable;
+	iterator = get(iterable);
 	arr = [];
 	result = value(iterator.next());
 	while (!result.done) {
