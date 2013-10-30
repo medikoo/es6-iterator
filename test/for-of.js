@@ -11,6 +11,11 @@ module.exports = function (t, a) {
 		a(this, y, "Array: context:  " + (i++) + "#");
 	}, y);
 	i = 0;
+	t(x = 'foo', function () {
+		a.deep(slice.call(arguments), [x[i]], "String " + i + "#");
+		a(this, y, "String: context:  " + (i++) + "#");
+	}, y);
+	i = 0;
 	t(new ArrayIterator(x), function () {
 		a.deep(slice.call(arguments), [x[i]], "Iterator " + i + "#");
 		a(this, y, "Iterator: context:  " + (i++) + "#");
