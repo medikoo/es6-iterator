@@ -4,9 +4,11 @@ var Iterator = require('../');
 
 module.exports = function (t, a) {
 	a(t(), false, "Undefined");
+	a(t(123), false, "Number");
 	a(t({}), false, "Plain object");
 	a(t({ length: 0 }), false, "Array-like");
 	a(t({ '@@iterator': function () { return new Iterator([]); } }),
 		true, "Iterator");
-	a(t([]), true, 'Array');
+	a(t([]), true, "Array");
+	a(t('foo'), true, "String");
 };
