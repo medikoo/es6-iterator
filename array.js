@@ -1,9 +1,10 @@
 'use strict';
 
-var contains   = require('es5-ext/string/#/contains')
-  , startsWith = require('es5-ext/string/#/starts-with')
-  , d          = require('d/d')
-  , Iterator   = require('./')
+var setPrototypeOf = require('es5-ext/object/set-prototype-of')
+  , contains       = require('es5-ext/string/#/contains')
+  , startsWith     = require('es5-ext/string/#/starts-with')
+  , d              = require('d/d')
+  , Iterator       = require('./')
 
   , defineProperty = Object.defineProperty
   , ArrayIterator;
@@ -20,6 +21,7 @@ ArrayIterator = module.exports = function (arr, kind) {
 	else kind = 'value';
 	defineProperty(this, '__kind__', d('', kind));
 };
+if (setPrototypeOf) setPrototypeOf(ArrayIterator, Iterator);
 
 ArrayIterator.prototype = Object.create(Iterator.prototype, {
 	constructor: d(ArrayIterator),
