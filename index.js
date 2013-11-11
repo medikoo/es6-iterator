@@ -28,25 +28,29 @@ module.exports = Iterator = function (list, context) {
 
 Object.defineProperties(Iterator.prototype, assign({
 	constructor: d(Iterator),
-	next: d(function () {
+	_next: d(function () {
 		var i, l;
-		if (!this.__list__) return { done: true, value: undefined };
+		if (!this.__list__) return;
 		if (this.__redo__) {
 			i = this.__redo__.shift();
-			if (i !== undefined) return { done: false, value: this._resolve(i) };
+			if (i !== undefined) return i;
 		}
 		l = this.__list__.length >>> 0;
 		while (this.__nextIndex__ < l) {
 			if (!this._sparse ||
 					hasOwnProperty.call(this.__list__, this.__nextIndex__)) {
-				return { done: false, value: this._resolve(this.__nextIndex__++) };
+				return this.__nextIndex__++;
 			}
 			++this.__nextIndex__;
 		}
 		this._unBind();
-		return { done: true, value: undefined };
 	}),
+	next: d(function () { return this._createResult(this._next()); }),
 	_sparse: d(false),
+	_createResult: d(function (i) {
+		if (i === undefined) return { done: true, value: undefined };
+		return { done: false, value: this._resolve(i) };
+	}),
 	_resolve: d(function (i) { return this.__list__[i]; }),
 	_unBind: d(function () {
 		this.__list__ = null;
