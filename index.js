@@ -57,8 +57,9 @@ Object.defineProperties(Iterator.prototype, assign({
 		this.__context__.off('_clear', this._onClear);
 		this.__context__ = null;
 	}),
-	toString: d(function () { return '[object Iterator]'; }),
-	'@@iterator': d(function () { return this; })
+	'@@iterator': d(function () { return this; }),
+	'@@toStringTag': d('c', 'Iterator'),
+	toString: d(function () { return '[object Iterator]'; })
 }, autoBind({
 	_onAdd: d(function (index) {
 		if (index >= this.__nextIndex__) return;
