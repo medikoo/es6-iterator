@@ -6,6 +6,7 @@ var clear    = require('es5-ext/array/#/clear')
   , value    = require('es5-ext/object/valid-value')
   , d        = require('d/d')
   , autoBind = require('d/auto-bind')
+  , Symbol   = require('es6-symbol')
 
   , hasOwnProperty = Object.prototype.hasOwnProperty
   , defineProperty = Object.defineProperty
@@ -61,8 +62,6 @@ defineProperties(Iterator.prototype, assign({
 		this.__context__.off('_clear', this._onClear);
 		this.__context__ = null;
 	}),
-	'@@iterator': d(function () { return this; }),
-	'@@toStringTag': d('c', 'Iterator'),
 	toString: d(function () { return '[object Iterator]'; })
 }, autoBind({
 	_onAdd: d(function (index) {
@@ -93,3 +92,8 @@ defineProperties(Iterator.prototype, assign({
 		this.__nextIndex__ = 0;
 	})
 })));
+
+defineProperty(Iterator.prototype, Symbol.iterator, d(function () {
+	return this;
+}));
+defineProperty(Iterator.prototype, Symbol.toStringTag, d('', 'Iterator'));

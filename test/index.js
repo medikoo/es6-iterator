@@ -1,6 +1,7 @@
 'use strict';
 
-var ee = require('event-emitter');
+var ee             = require('event-emitter')
+  , iteratorSymbol = require('es6-symbol').iterator;
 
 module.exports = function (T) {
 	return {
@@ -8,7 +9,7 @@ module.exports = function (T) {
 			var x = ['raz', 'dwa', 'trzy', 'cztery', 'pięć'], it, y, z;
 
 			it = new T(x);
-			a(it['@@iterator'](), it, "@@iterator");
+			a(it[iteratorSymbol](), it, "@@iterator");
 			y = it.next();
 			a.deep(y, { done: false, value: 'raz' }, "#1");
 			z = it.next();

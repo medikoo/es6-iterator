@@ -1,9 +1,11 @@
 'use strict';
 
+var iteratorSymbol = require('es6-symbol').iterator;
+
 module.exports = function (T, a) {
 	var it = new T('foobar');
 
-	a(it['@@iterator'](), it, "@@iterator");
+	a(it[iteratorSymbol](), it, "@@iterator");
 	a.deep(it.next(), { done: false, value: 'f' }, "#1");
 	a.deep(it.next(), { done: false, value: 'o' }, "#2");
 	a.deep(it.next(), { done: false, value: 'o' }, "#3");

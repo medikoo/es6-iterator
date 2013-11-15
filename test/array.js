@@ -1,12 +1,14 @@
 'use strict';
 
+var iteratorSymbol = require('es6-symbol').iterator;
+
 module.exports = function (T) {
 	return {
 		"Values": function (a) {
 			var x = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć'], it;
 
 			it = new T(x);
-			a(it['@@iterator'](), it, "@@iterator");
+			a(it[iteratorSymbol](), it, "@@iterator");
 			a.deep(it.next(), { done: false, value: 'raz' }, "#1");
 			a.deep(it.next(), { done: false, value: 'dwa' }, "#2");
 			x.splice(1, 0, 'elo');
@@ -21,7 +23,7 @@ module.exports = function (T) {
 			var x = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć'], it;
 
 			it = new T(x, 'key+value');
-			a(it['@@iterator'](), it, "@@iterator");
+			a(it[iteratorSymbol](), it, "@@iterator");
 			a.deep(it.next(), { done: false, value: [0, 'raz'] }, "#1");
 			a.deep(it.next(), { done: false, value: [1, 'dwa'] }, "#2");
 			x.splice(1, 0, 'elo');
@@ -36,7 +38,7 @@ module.exports = function (T) {
 			var x = ['raz', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć'], it;
 
 			it = new T(x, 'key');
-			a(it['@@iterator'](), it, "@@iterator");
+			a(it[iteratorSymbol](), it, "@@iterator");
 			a.deep(it.next(), { done: false, value: 0 }, "#1");
 			a.deep(it.next(), { done: false, value: 1 }, "#2");
 			x.splice(1, 0, 'elo');
