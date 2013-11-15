@@ -26,7 +26,7 @@ module.exports = Iterator = function (list, context) {
 	context.on('_clear', this._onClear);
 };
 
-Object.defineProperties(Iterator.prototype, assign({
+defineProperties(Iterator.prototype, assign({
 	constructor: d(Iterator),
 	_next: d(function () {
 		var i, l;
