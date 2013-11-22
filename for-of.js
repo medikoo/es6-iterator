@@ -4,27 +4,36 @@ var callable = require('es5-ext/object/valid-callable')
   , isString = require('es5-ext/string/is-string')
   , get      = require('./get')
 
-  , isArray = Array.isArray, forEach = Array.prototype.forEach
+  , isArray = Array.isArray, some = Array.prototype.some
   , call = Function.prototype.call;
 
 module.exports = function (iterable, cb/*, thisArg*/) {
-	var mode, thisArg = arguments[2], result;
+	var mode, thisArg = arguments[2], result, doBreak, broken;
 	if (isArray(iterable)) mode = 'array';
 	else if (isString(iterable)) mode = 'string';
 	else iterable = get(iterable);
 
 	callable(cb);
+	doBreak = function () { broken = true; };
 	if (mode === 'array') {
-		iterable.forEach(function (value) { call.call(cb, thisArg, value); });
+		iterable.some(function (value) {
+			call.call(cb, thisArg, value, doBreak);
+			if (broken) return true;
+		});
 		return;
 	}
 	if (mode === 'string') {
-		forEach.call(iterable, function (value) { call.call(cb, thisArg, value); });
+		some.call(iterable, function (value) {
+			call.call(cb, thisArg, value, doBreak);
+			if (broken) return true;
+		});
 		return;
 	}
 	result = iterable.next();
+
 	while (!result.done) {
-		call.call(cb, thisArg, result.value);
+		call.call(cb, thisArg, result.value, doBreak);
+		if (broken) return;
 		result = iterable.next();
 	}
 };
