@@ -3,7 +3,7 @@
 var setPrototypeOf = require('es5-ext/object/set-prototype-of')
   , contains       = require('es5-ext/string/#/contains')
   , startsWith     = require('es5-ext/string/#/starts-with')
-  , d              = require('d/d')
+  , d              = require('d')
   , Iterator       = require('./')
 
   , defineProperty = Object.defineProperty

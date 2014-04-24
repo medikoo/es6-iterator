@@ -4,7 +4,7 @@ var clear    = require('es5-ext/array/#/clear')
   , assign   = require('es5-ext/object/assign')
   , callable = require('es5-ext/object/valid-callable')
   , value    = require('es5-ext/object/valid-value')
-  , d        = require('d/d')
+  , d        = require('d')
   , autoBind = require('d/auto-bind')
   , Symbol   = require('es6-symbol')
 
