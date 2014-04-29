@@ -1,6 +1,7 @@
 'use strict';
 
 var clear    = require('es5-ext/array/#/clear')
+  , toPosInt = require('es5-ext/number/to-pos-integer')
   , assign   = require('es5-ext/object/assign')
   , callable = require('es5-ext/object/valid-callable')
   , value    = require('es5-ext/object/valid-value')
@@ -35,7 +36,7 @@ defineProperties(Iterator.prototype, assign({
 			i = this.__redo__.shift();
 			if (i !== undefined) return i;
 		}
-		l = this.__list__.length >>> 0;
+		l = toPosInt(this.__list__.length);
 		if (this.__nextIndex__ < l) return this.__nextIndex__++;
 		this._unBind();
 	}),
