@@ -14,4 +14,5 @@ module.exports = function (t, a) {
 	a(t(iterator), true, "Iterator");
 	a(t([]), true, "Array");
 	a(t('foo'), true, "String");
+	a(t(''), true, "Empty string");
 };
