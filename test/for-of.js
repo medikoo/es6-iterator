@@ -13,7 +13,13 @@ module.exports = function (t, a) {
 	i = 0;
 	t(x = 'foo', function () {
 		a.deep(slice.call(arguments, 0, 1), [x[i]], "String " + i + "#");
-		a(this, y, "String: context:  " + (i++) + "#");
+		a(this, y, "Regular String: context:  " + (i++) + "#");
+	}, y);
+	i = 0;
+	x = ['r', '💩', 'z'];
+	t('r💩z', function () {
+		a.deep(slice.call(arguments, 0, 1), [x[i]], "String " + i + "#");
+		a(this, y, "Unicode String: context:  " + (i++) + "#");
 	}, y);
 	i = 0;
 	t(new ArrayIterator(x), function () {
