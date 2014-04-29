@@ -1,3 +1,6 @@
+// Thanks @mathiasbynens
+// http://mathiasbynens.be/notes/javascript-unicode
+
 'use strict';
 
 var setPrototypeOf = require('es5-ext/object/set-prototype-of')
