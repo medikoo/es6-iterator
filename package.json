@@ -18,7 +18,7 @@
   "dependencies": {
     "d": "~0.1.1",
     "es5-ext": "~0.10.2",
-    "es6-symbol": "~0.1.1"
+    "es6-symbol": "0.1.x"
   },
   "devDependencies": {
     "event-emitter": "~0.3.1",
