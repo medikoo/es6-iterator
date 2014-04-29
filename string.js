@@ -1,5 +1,5 @@
 // Thanks @mathiasbynens
-// http://mathiasbynens.be/notes/javascript-unicode
+// http://mathiasbynens.be/notes/javascript-unicode#iterating-over-symbols
 
 'use strict';
 
