@@ -139,7 +139,7 @@ If _obj_ is an iterable it is returned. Otherwise _TypeError_ is thrown.
 
 ### Method extensions
 
-### iterator.chain(iterator1[, …iteratorn]) _(es6-iterator/#/chain)_
+#### iterator.chain(iterator1[, …iteratorn]) _(es6-iterator/#/chain)_
 
 Chain multiple iterators into one.
 
