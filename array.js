@@ -2,7 +2,6 @@
 
 var setPrototypeOf = require('es5-ext/object/set-prototype-of')
   , contains       = require('es5-ext/string/#/contains')
-  , startsWith     = require('es5-ext/string/#/starts-with')
   , d              = require('d')
   , Iterator       = require('./')
 
@@ -12,9 +11,6 @@ var setPrototypeOf = require('es5-ext/object/set-prototype-of')
 ArrayIterator = module.exports = function (arr, kind) {
 	if (!(this instanceof ArrayIterator)) return new ArrayIterator(arr, kind);
 	Iterator.call(this, arr);
-	if (kind && startsWith.call(kind, 'sparse:')) {
-		defineProperty(this, '_sparse', d('', true));
-	}
 	if (!kind) kind = 'value';
 	else if (contains.call(kind, 'key+value')) kind = 'key+value';
 	else if (contains.call(kind, 'key')) kind = 'key';
