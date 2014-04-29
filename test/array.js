@@ -62,11 +62,6 @@ module.exports = function (T) {
 			a.deep(it.next(), { done: false, value: 'dwa' }, "#5");
 			a.deep(it.next(), { done: false, value: undefined }, "#6");
 			a.deep(it.next(), { done: true, value: undefined }, "End");
-
-			it = new T(x, 'sparse:value');
-			a.deep(it.next(), { done: false, value: 'raz' }, "#3");
-			a.deep(it.next(), { done: false, value: 'dwa' }, "#5");
-			a.deep(it.next(), { done: true, value: undefined }, "End");
 		}
 	};
 };
