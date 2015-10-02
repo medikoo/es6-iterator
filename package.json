@@ -1,6 +1,6 @@
 {
   "name": "es6-iterator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Iterator abstraction based on ES6 specification",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
@@ -18,10 +18,10 @@
   "dependencies": {
     "d": "^0.1.1",
     "es5-ext": "^0.10.7",
-    "es6-symbol": "^2.0.1"
+    "es6-symbol": "3"
   },
   "devDependencies": {
-    "event-emitter": "^0.3.3",
+    "event-emitter": "^0.3.4",
     "tad": "^0.2.3",
     "xlint": "^0.2.2",
     "xlint-jslint-medikoo": "^0.1.3"

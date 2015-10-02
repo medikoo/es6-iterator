@@ -1,3 +1,6 @@
+v2.0.0  --  2015.10.02
+* Use es6-symbol at v3
+
 v1.0.0  --  2015.06.23
 * Implement support for arguments object
 * Drop support for v0.8 node ('^' in package.json dependencies)
