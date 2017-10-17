@@ -36,4 +36,4 @@ StringIterator.prototype = Object.create(Iterator.prototype, {
 		return char;
 	})
 });
-defineProperty(StringIterator.prototype, Symbol.toStringTag, d("", "String Iterator"));
+defineProperty(StringIterator.prototype, Symbol.toStringTag, d("c", "String Iterator"));
