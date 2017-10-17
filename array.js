@@ -3,6 +3,7 @@
 var setPrototypeOf = require("es5-ext/object/set-prototype-of")
   , contains       = require("es5-ext/string/#/contains")
   , d              = require("d")
+  , Symbol         = require("es6-symbol")
   , Iterator       = require("./");
 
 var defineProperty = Object.defineProperty, ArrayIterator;
@@ -26,8 +27,6 @@ ArrayIterator.prototype = Object.create(Iterator.prototype, {
 		if (this.__kind__ === "value") return this.__list__[i];
 		if (this.__kind__ === "key+value") return [i, this.__list__[i]];
 		return i;
-	}),
-	toString: d(function () {
-		return "[object Array Iterator]";
 	})
 });
+defineProperty(ArrayIterator.prototype, Symbol.toStringTag, d("c", "Array Iterator"));

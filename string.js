@@ -5,6 +5,7 @@
 
 var setPrototypeOf = require("es5-ext/object/set-prototype-of")
   , d              = require("d")
+  , Symbol         = require("es6-symbol")
   , Iterator       = require("./");
 
 var defineProperty = Object.defineProperty, StringIterator;
@@ -33,8 +34,6 @@ StringIterator.prototype = Object.create(Iterator.prototype, {
 		code = char.charCodeAt(0);
 		if (code >= 0xd800 && code <= 0xdbff) return char + this.__list__[this.__nextIndex__++];
 		return char;
-	}),
-	toString: d(function () {
-		return "[object String Iterator]";
 	})
 });
+defineProperty(StringIterator.prototype, Symbol.toStringTag, d("", "String Iterator"));

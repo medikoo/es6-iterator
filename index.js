@@ -62,7 +62,7 @@ defineProperties(
 				this.__context__ = null;
 			}),
 			toString: d(function () {
-				return "[object Iterator]";
+				return "[object " + (this[Symbol.toStringTag] || "Object") + "]";
 			})
 		},
 		autoBind({
@@ -104,4 +104,3 @@ defineProperty(
 		return this;
 	})
 );
-defineProperty(Iterator.prototype, Symbol.toStringTag, d("", "Iterator"));
