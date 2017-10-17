@@ -24,11 +24,13 @@ module.exports = Iterator = function (list, context) {
 	context.on("_clear", this._onClear);
 };
 
+// Internal %IteratorPrototype% doesn't expose its constructor
+delete Iterator.prototype.constructor;
+
 defineProperties(
 	Iterator.prototype,
 	assign(
 		{
-			constructor: d(Iterator),
 			_next: d(function () {
 				var i;
 				if (!this.__list__) return undefined;

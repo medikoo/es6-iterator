@@ -17,8 +17,10 @@ StringIterator = module.exports = function (str) {
 };
 if (setPrototypeOf) setPrototypeOf(StringIterator, Iterator);
 
+// Internal %ArrayIteratorPrototype% doesn't expose its constructor
+delete StringIterator.prototype.constructor;
+
 StringIterator.prototype = Object.create(Iterator.prototype, {
-	constructor: d(StringIterator),
 	_next: d(function () {
 		if (!this.__list__) return undefined;
 		if (this.__nextIndex__ < this.__length__) return this.__nextIndex__++;

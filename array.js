@@ -18,8 +18,10 @@ ArrayIterator = module.exports = function (arr, kind) {
 };
 if (setPrototypeOf) setPrototypeOf(ArrayIterator, Iterator);
 
+// Internal %ArrayIteratorPrototype% doesn't expose its constructor
+delete ArrayIterator.prototype.constructor;
+
 ArrayIterator.prototype = Object.create(Iterator.prototype, {
-	constructor: d(ArrayIterator),
 	_resolve: d(function (i) {
 		if (this.__kind__ === "value") return this.__list__[i];
 		if (this.__kind__ === "key+value") return [i, this.__list__[i]];
