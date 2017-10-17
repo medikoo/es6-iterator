@@ -1,6 +1,6 @@
 {
   "name": "es6-iterator",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Iterator abstraction based on ES6 specification",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
