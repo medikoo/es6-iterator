@@ -11,3 +11,7 @@ All notable changes to this project will be documented in this file. See [standa
 * constructor exposure ([dbc0c51](https://github.com/medikoo/es6-iterator/commit/dbc0c51))
 * do not allow non constructor calls ([1f2f800](https://github.com/medikoo/es6-iterator/commit/1f2f800))
 * toString and toStringTag symbol definitions. ([2d17786](https://github.com/medikoo/es6-iterator/commit/2d17786)), closes [#6](https://github.com/medikoo/es6-iterator/issues/6)
+
+## Changelog for previous versions
+
+See `CHANGES` file
