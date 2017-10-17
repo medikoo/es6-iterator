@@ -1,11 +1,11 @@
 // Thanks @mathiasbynens
 // http://mathiasbynens.be/notes/javascript-unicode#iterating-over-symbols
 
-'use strict';
+"use strict";
 
-var setPrototypeOf = require('es5-ext/object/set-prototype-of')
-  , d              = require('d')
-  , Iterator       = require('./')
+var setPrototypeOf = require("es5-ext/object/set-prototype-of")
+  , d              = require("d")
+  , Iterator       = require("./")
 
   , defineProperty = Object.defineProperty
   , StringIterator;
@@ -14,7 +14,7 @@ StringIterator = module.exports = function (str) {
 	if (!(this instanceof StringIterator)) return new StringIterator(str);
 	str = String(str);
 	Iterator.call(this, str);
-	defineProperty(this, '__length__', d('', str.length));
+	defineProperty(this, "__length__", d("", str.length));
 
 };
 if (setPrototypeOf) setPrototypeOf(StringIterator, Iterator);
@@ -33,5 +33,7 @@ StringIterator.prototype = Object.create(Iterator.prototype, {
 		if ((code >= 0xD800) && (code <= 0xDBFF)) return char + this.__list__[this.__nextIndex__++];
 		return char;
 	}),
-	toString: d(function () { return '[object String Iterator]'; })
+	toString: d(function () {
+ return "[object String Iterator]";
+})
 });
