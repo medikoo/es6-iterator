@@ -20,9 +20,10 @@ if (setPrototypeOf) setPrototypeOf(StringIterator, Iterator);
 StringIterator.prototype = Object.create(Iterator.prototype, {
 	constructor: d(StringIterator),
 	_next: d(function () {
-		if (!this.__list__) return;
+		if (!this.__list__) return undefined;
 		if (this.__nextIndex__ < this.__length__) return this.__nextIndex__++;
 		this._unBind();
+		return undefined;
 	}),
 	_resolve: d(function (i) {
 		var char = this.__list__[i], code;

@@ -31,13 +31,14 @@ defineProperties(
 			constructor: d(Iterator),
 			_next: d(function () {
 				var i;
-				if (!this.__list__) return;
+				if (!this.__list__) return undefined;
 				if (this.__redo__) {
 					i = this.__redo__.shift();
 					if (i !== undefined) return i;
 				}
 				if (this.__nextIndex__ < this.__list__.length) return this.__nextIndex__++;
 				this._unBind();
+				return undefined;
 			}),
 			next: d(function () {
 				return this._createResult(this._next());
@@ -82,8 +83,8 @@ defineProperties(
 				if (!this.__redo__) return;
 				i = this.__redo__.indexOf(index);
 				if (i !== -1) this.__redo__.splice(i, 1);
-				this.__redo__.forEach(function (redo, i) {
-					if (redo > index) this.__redo__[i] = --redo;
+				this.__redo__.forEach(function (redo, j) {
+					if (redo > index) this.__redo__[j] = --redo;
 				}, this);
 			}),
 			_onClear: d(function () {
