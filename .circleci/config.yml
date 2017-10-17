@@ -31,8 +31,7 @@ jobs:
           paths:
             - node_modules
           key: dependencies-v8-{{ checksum "package.json" }}
-      - run: npm run check-coverage
-      - run: bash <(curl -s https://codecov.io/bash)
+      - run: npm test
   
   node6:
     docker:
