@@ -3,10 +3,9 @@
 var setPrototypeOf = require("es5-ext/object/set-prototype-of")
   , contains       = require("es5-ext/string/#/contains")
   , d              = require("d")
-  , Iterator       = require("./")
+  , Iterator       = require("./");
 
-  , defineProperty = Object.defineProperty
-  , ArrayIterator;
+var defineProperty = Object.defineProperty, ArrayIterator;
 
 ArrayIterator = module.exports = function (arr, kind) {
 	if (!(this instanceof ArrayIterator)) return new ArrayIterator(arr, kind);
@@ -27,6 +26,6 @@ ArrayIterator.prototype = Object.create(Iterator.prototype, {
 		return i;
 	}),
 	toString: d(function () {
- return "[object Array Iterator]";
-})
+		return "[object Array Iterator]";
+	})
 });
