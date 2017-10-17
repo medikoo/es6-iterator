@@ -10,7 +10,7 @@ var setPrototypeOf = require("es5-ext/object/set-prototype-of")
 var defineProperty = Object.defineProperty, StringIterator;
 
 StringIterator = module.exports = function (str) {
-	if (!(this instanceof StringIterator)) return new StringIterator(str);
+	if (!(this instanceof StringIterator)) throw new TypeError("Constructor requires 'new'");
 	str = String(str);
 	Iterator.call(this, str);
 	defineProperty(this, "__length__", d("", str.length));

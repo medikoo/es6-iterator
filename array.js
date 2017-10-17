@@ -8,7 +8,7 @@ var setPrototypeOf = require("es5-ext/object/set-prototype-of")
 var defineProperty = Object.defineProperty, ArrayIterator;
 
 ArrayIterator = module.exports = function (arr, kind) {
-	if (!(this instanceof ArrayIterator)) return new ArrayIterator(arr, kind);
+	if (!(this instanceof ArrayIterator)) throw new TypeError("Constructor requires 'new'");
 	Iterator.call(this, arr);
 	if (!kind) kind = "value";
 	else if (contains.call(kind, "key+value")) kind = "key+value";

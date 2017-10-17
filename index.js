@@ -11,7 +11,7 @@ var clear    = require("es5-ext/array/#/clear")
 var defineProperty = Object.defineProperty, defineProperties = Object.defineProperties, Iterator;
 
 module.exports = Iterator = function (list, context) {
-	if (!(this instanceof Iterator)) return new Iterator(list, context);
+	if (!(this instanceof Iterator)) throw new TypeError("Constructor requires 'new'");
 	defineProperties(this, {
 		__list__: d("w", value(list)),
 		__context__: d("w", context),
