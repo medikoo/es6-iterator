@@ -146,3 +146,19 @@ Chain multiple iterators into one.
 ### Tests [![Build Status](https://travis-ci.org/medikoo/es6-iterator.png)](https://travis-ci.org/medikoo/es6-iterator)
 
 	$ npm test
+
+## Security contact information
+
+To report a security vulnerability, please use the [Tidelift security contact](https://tidelift.com/security). Tidelift will coordinate the fix and disclosure.
+
+---
+
+<div align="center">
+	<b>
+		<a href="https://tidelift.com/subscription/pkg/npm-es6-iterator?utm_source=npm-es6-iterator&utm_medium=referral&utm_campaign=readme">Get professional support for d with a Tidelift subscription</a>
+	</b>
+	<br>
+	<sub>
+		Tidelift helps make open source sustainable for maintainers while giving companies<br>assurances about security, maintenance, and licensing for their dependencies.
+	</sub>
+</div>
